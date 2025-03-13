@@ -32,6 +32,6 @@ class {$name}
         File::ensureDirectoryExists(app_path('Services'));
         File::put($path, $template);
 
-        $this->info("Services {$name} criada com sucesso!");
+        $this->info("Services {$name} successfully created!");
     }
 }

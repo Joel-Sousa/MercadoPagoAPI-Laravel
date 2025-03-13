@@ -35,6 +35,6 @@ class {$name}
         File::ensureDirectoryExists(app_path('Repositories'));
         File::put($path, $template);
 
-        $this->info("Repositories {$name} criada com sucesso!");
+        $this->info("Repositories {$name} successfully created!");
     }
 }
