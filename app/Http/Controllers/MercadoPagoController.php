@@ -18,5 +18,10 @@ class MercadoPagoController extends Controller
     {
         $this->mpService->createCreditCardPayment($request);
     }
+
+    public function createPixPayment(Request $request)
+    {
+        $this->mpService->createPixPayment($request);
+    }
     
 }
