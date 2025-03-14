@@ -2,13 +2,14 @@
 
 namespace App\Services;
 
-use DateTime;
-use DateTimeZone;
+use App\Traits\UtilTrait;
 use MercadoPago\Client\Payment\PaymentClient;
 use MercadoPago\MercadoPagoConfig;
 
 class MercadoPagoService
 {
+    use UtilTrait;
+    
     public function statusPayment($request)
     {
         MercadoPagoConfig::setAccessToken(env("MERCADO_PAGO_ACCESS_TOKEN"));
@@ -23,7 +24,7 @@ class MercadoPagoService
                 'id' => $paymentStatus->id,
                 'status' => $paymentStatus->status,
                 'detail' => $paymentStatus->status_detail,
-                'data_approved' => self::dataFormat($paymentStatus->date_approved),
+                'data_approved' => $this->dateFormat($paymentStatus->date_approved),
                 'transaction_amount' => $paymentStatus->transaction_amount,
                 'method_payment' => $paymentStatus->payment_method_id,
                 'qr_code' => $paymentStatus->point_of_interaction->transaction_data->qr_code_base64 ?? '',
@@ -39,11 +40,5 @@ class MercadoPagoService
             return response(view('welcome', compact('response_fields')), 400);
         }
     }
-
-    private static function dataFormat($date)
-    {
-        $data = new DateTime($date, new DateTimeZone('America/Sao_Paulo'));
-        $data->setTimezone(new DateTimeZone('Etc/GMT+3'));
-        return $data->format('d/m/Y H:i:s');
-    }
+    
 }

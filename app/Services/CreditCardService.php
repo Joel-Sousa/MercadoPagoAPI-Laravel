@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\CreditCardRepository;
+use App\Traits\UtilTrait;
 use Exception;
 use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\Payment\PaymentClient;
@@ -10,6 +11,8 @@ use MercadoPago\MercadoPagoConfig;
 
 class CreditCardService
 {
+    use UtilTrait;
+
     protected $creditCardRepository;
 
     public function __construct(CreditCardRepository $creditCardRepository)
@@ -48,7 +51,7 @@ class CreditCardService
                 $request_options
             );
 
-            self::validatePaymentResult($payment);
+            $this->validatePaymentResult($payment);
 
             $this->creditCardRepository->createCreditCardPayment(
                 $request->merge([
@@ -66,27 +69,13 @@ class CreditCardService
                 'status_detail' => $payment->status_detail
             );
 
-            return response(json_encode($response_fields), 201);
+            return $response_fields;
         } catch (Exception $e) {
             $response_fields = array('error_message' => $e->getMessage());
 
             $response_body = json_encode($response_fields);
 
             return response($response_body, 400);
-        }
-    }
-
-    private static function validatePaymentResult($payment)
-    {
-        if ($payment->id === null) {
-            $error_message = 'Unknown error cause';
-
-            if ($payment->error !== null) {
-                $sdk_error_message = $payment->error->message;
-                $error_message = $sdk_error_message !== null ? $sdk_error_message : $error_message;
-            }
-
-            throw new Exception($error_message);
         }
     }
 }

@@ -3,15 +3,14 @@
 namespace App\Services;
 
 use App\Repositories\BankTicketRepository;
-use DateTime;
-use DateTimeZone;
-use Exception;
+use App\Traits\UtilTrait;
 use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\Payment\PaymentClient;
 use MercadoPago\MercadoPagoConfig;
 
 class BankTicketService
 {
+    use UtilTrait;
 
     protected $bankTicketRepository;
     
@@ -54,7 +53,7 @@ class BankTicketService
                 ]
             ], $request_options);
 
-            self::validatePaymentResult($payment);
+            $this->validatePaymentResult($payment);
 
             $this->bankTicketRepository->createBankTicketPayment(
                 $request->merge([
@@ -79,32 +78,11 @@ class BankTicketService
                 'external_resource_url' => $payment->transaction_details->external_resource_url
             );
 
-            return response(view('bank_ticket', compact('resp')), 201);
+            return $resp;
             
         } catch (\Exception $e) {
             $resp = array('error_message' => $e->getMessage());
             return response(view('bank_ticket', compact('resp')), 401);
         }
-    }
-
-    private static function validatePaymentResult($payment)
-    {
-        if ($payment->id === null) {
-            $error_message = 'Unknown error cause';
-
-            if ($payment->error !== null) {
-                $sdk_error_message = $payment->error->message;
-                $error_message = $sdk_error_message !== null ? $sdk_error_message : $error_message;
-            }
-
-            throw new Exception($error_message);
-        }
-    }
-
-    private function dataFormat($date)
-    {
-        $data = new DateTime($date, new DateTimeZone('America/Sao_Paulo'));
-        $data->setTimezone(new DateTimeZone('Etc/GMT+3'));
-        return $data->format('d/m/Y H:i:s');
     }
 }

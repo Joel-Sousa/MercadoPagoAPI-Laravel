@@ -16,6 +16,7 @@ class CreditCardController extends Controller
 
     public function createCreditCardPayment(Request $request)
     {
-        $this->creditCardService->createCreditCardPayment($request);
+        $resp = $this->creditCardService->createCreditCardPayment($request);
+        return response(json_encode($resp), 201);
     }
 }

@@ -16,6 +16,7 @@ class PixController extends Controller
 
     public function createPixPayment(Request $request)
     {
-        return $this->pixService->createPixPayment($request);
+        $resp = $this->pixService->createPixPayment($request);
+        return response(view('pix_pay', compact('resp')), 201);
     }
 }

@@ -18,7 +18,8 @@ class BankTicketController extends Controller
 
     public function createBankTicketPayment(Request $request)
     {
-         $this->bankTicketService->createBankTicketPayment($request);
+         $resp = $this->bankTicketService->createBankTicketPayment($request);
+         return response(view('bank_ticket', compact('resp')), 201);
     }
     
 }

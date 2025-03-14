@@ -7,13 +7,11 @@ use App\Http\Controllers\PixController;
 use App\Models\BankTicket;
 use App\Models\CreditCard;
 use App\Models\Pix;
-use App\Traits\UtilTrait;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-
 
 Route::get('/credit-card', function () {
     $creditCard = CreditCard::get();
@@ -31,7 +29,6 @@ Route::get('/bank-ticket', function () {
 })->name('bank-ticket');
 
 Route::get('/status-payment', [MercadoPagoController::class, 'statusPayment']);
-
 
 Route::post('/credit-card', [CreditCardController::class, 'createCreditCardPayment']);
 Route::post('/pix', [PixController::class, 'createPixPayment']);

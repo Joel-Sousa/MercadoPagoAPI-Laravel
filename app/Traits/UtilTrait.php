@@ -22,7 +22,7 @@ trait UtilTrait
         }
     }
 
-    public function dataFormat($date)
+    public function dateFormat($date)
     {
         $data = new DateTime($date, new DateTimeZone('America/Sao_Paulo'));
         $data->setTimezone(new DateTimeZone('Etc/GMT+3'));
