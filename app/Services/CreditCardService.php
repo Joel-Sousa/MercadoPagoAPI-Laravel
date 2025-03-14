@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\SendMailJob;
 use App\Repositories\CreditCardRepository;
 use App\Traits\UtilTrait;
 use Exception;
@@ -63,6 +64,21 @@ class CreditCardService
                     'email' => $request['payer']['email'],
                 ])
             );
+
+            $data = [
+                'view' => 'mail.credit_card_payment',
+                'name' => 'Nome completo',
+                'description' => $request['description'],
+                'email' => $request['payer']['email'],
+                'subject' => 'Pagamento cartao de credito',
+                'message' => 'Obrigado pela compra',
+                'value' => $request['transaction_amount'],
+                'status' => $payment->status,
+                'status_detail' => $payment->status_detail,
+
+            ];
+
+            SendMailJob::dispatch($data);
 
             $response_fields = array(
                 'status' => $payment->status,

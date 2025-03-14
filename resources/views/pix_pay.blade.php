@@ -14,7 +14,7 @@
 
     <div>
         @if (!empty($resp))
-
+        
             @if (array_key_exists('error_message', $resp))
                 Mensagem: {{ $resp['error_message'] }}
             @else

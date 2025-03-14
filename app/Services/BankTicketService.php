@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\SendMailJob;
 use App\Repositories\BankTicketRepository;
 use App\Traits\UtilTrait;
 use MercadoPago\Client\Common\RequestOptions;
@@ -13,7 +14,7 @@ class BankTicketService
     use UtilTrait;
 
     protected $bankTicketRepository;
-    
+
     public function __construct(BankTicketRepository $bankTicketRepository)
     {
         $this->bankTicketRepository = $bankTicketRepository;
@@ -70,7 +71,25 @@ class BankTicketService
                     'neighborhood' => $request['neighborhood'],
                     'city' => $request['city'],
                     'state' => $request['federalUnit']
-                ]));
+                ])
+            );
+
+            $data = [
+                'view' => 'mail.bank_ticket_payment',
+                'name' => $request["payerFirstName"],
+                'description' => $request['description'],
+                'email' => $request['email'],
+                'subject' => 'Pagamento Boleto',
+                'message' => 'Obrigado pela compra',
+                'type_document' => $request["identificationType"],
+                'number_document' => $request["identificationNumber"],
+                'status' => $payment->status,
+                'status_detail' => $payment->status_detail,
+                'value' => $request["transactionAmount"],
+                'external_resource_url' => $payment->transaction_details->external_resource_url
+            ];
+
+            SendMailJob::dispatch($data);
 
             $resp = array(
                 'status' => $payment->status,
@@ -79,7 +98,6 @@ class BankTicketService
             );
 
             return $resp;
-            
         } catch (\Exception $e) {
             $resp = array('error_message' => $e->getMessage());
             return response(view('bank_ticket', compact('resp')), 401);
