@@ -61,14 +61,14 @@
                 <div>
                     <div>
                         <input id="form-checkout__payerFirstName" name="payerFirstName" type="text"
-                            placeholder='Nome' value='toto'>
+                            placeholder='Nome'>
                     </div>
                     <div>
                         <input id="form-checkout__payerLastName" name="payerLastName" type="text"
-                            placeholder='Sobrenome' value='silva'>
+                            placeholder='Sobrenome' >
                     </div>
                     <div>
-                        <input id="form-checkout__email" name="email" type="text" placeholder='E-Mail' value='tst@email.com'>
+                        <input id="form-checkout__email" name="email" type="text" placeholder='E-Mail' >
                     </div>
                     <div>
                         <select id="form-checkout__identificationType" name="identificationType"
@@ -76,16 +76,16 @@
                     </div>
                     <div>
                         <input id="form-checkout__identificationNumber" name="identificationNumber" type="text"
-                            placeholder='Numero do documento' value='12345678909'>
+                            placeholder='Numero do documento' >
                     </div>
                     <div>
-                        <input id="form-checkout__zipCode" name="zipCode" type="text" placeholder='Cep' maxlength='9' value='73020515'>
+                        <input id="form-checkout__zipCode" name="zipCode" type="text" placeholder='Cep' maxlength='9' >
                     </div>
                     <div>
                         <input id="form-checkout__streetName" name="streetName" type="text" placeholder='Rua'>
                     </div>
                     <div>
-                        <input id="form-checkout__streetNumber" name="streetNumber" type="text" placeholder='Numero' value='2'>
+                        <input id="form-checkout__streetNumber" name="streetNumber" type="text" placeholder='Numero' >
                     </div>
                     <div>
                         <input id="form-checkout__neighborhood" name="neighborhood" type="text" placeholder='Bairro'>
@@ -100,8 +100,8 @@
                 <div>
                     <div>
                         <input type="number" name="transactionAmount" id="transactionAmount" placeholder='Valor'
-                            value="100">
-                        <input type="text" name="description" id="description" value="Nome do Produto">
+                            >
+                        <input type="text" name="description" id="description" >
                         <br>
                         <button type="submit">Pagar</button>
                     </div>

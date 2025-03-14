@@ -62,19 +62,19 @@
                 <div id="form-checkout__cardNumber" class="container" ></div>
                 <div id="form-checkout__expirationDate" class="container" ></div>
                 <div id="form-checkout__securityCode" class="container" ></div>
-                <input type="text" id="form-checkout__cardholderName" value='APRO' />
+                <input type="text" id="form-checkout__cardholderName"/>
 
                 <select id="form-checkout__issuer"></select>
                 <select id="form-checkout__installments"></select>
                 <select id="form-checkout__identificationType"></select>
-                <input type="text" id="form-checkout__identificationNumber" placeholder='Numero do documento' value='12345678909'/>
-                <input type="email" id="form-checkout__cardholderEmail" placeholder='E-mail' value='dev4pk@gmail.com'/>
+                <input type="text" id="form-checkout__identificationNumber" placeholder='Numero do documento'/>
+                <input type="email" id="form-checkout__cardholderEmail" placeholder='E-mail' />
 
-                <input type="text" id="form-product-description" name='description' placeholder='Descricao' value='tst compra'/>
-                <input type="number" id="form-checkout__amount" name='name' value='10' placeholder='Valor' valor='10'/>
+                <input type="text" id="form-product-description" name='description' placeholder='Descricao'/>
+                <input type="number" id="form-checkout__amount" name='name'  placeholder='Valor' valor='10'/>
 
                 <button type="submit" id="form-checkout__submit">Pagar</button>
-                <progress value="0" class="progress-bar">Carregando...</progress>
+                <progress class="progress-bar">Carregando...</progress>
             </form>
         </div>
 

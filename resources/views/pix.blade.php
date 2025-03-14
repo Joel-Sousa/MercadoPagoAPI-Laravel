@@ -62,23 +62,23 @@
                 @csrf
                 <div>
                     <div>
-                        <input id="form-checkout__payerFirstName" name="payerFirstName" type="text" placeholder='Nome completo' value='toot'>
+                        <input id="form-checkout__payerFirstName" name="payerFirstName" type="text" placeholder='Nome completo' >
                     </div>
                     <div>
-                        <input id="form-checkout__email" name="email" type="text" placeholder='E-mail' value='dev4pk@gmail.com' >
+                        <input id="form-checkout__email" name="email" type="text" placeholder='E-mail' >
                     </div>
                     <div>
                         <select id="form-checkout__identificationType" name="identificationType" placeholder='Tipo de documento'
                             type="text"></select>
                     </div>
                     <div>
-                        <input id="form-checkout__identificationNumber" name="identificationNumber" type="text" placeholder='Numero do documento'  value='12345678909'>
+                        <input id="form-checkout__identificationNumber" name="identificationNumber" type="text" placeholder='Numero do documento'  >
                     </div>
                 </div>
                 <div>
                     <div>
-                        <input type="text" name="transactionAmount" id="transactionAmount" value='100'>
-                        <input type="text" name="description" id="description" placeholder='Descrição' value='tst descricao' >
+                        <input type="text" name="transactionAmount" id="transactionAmount" >
+                        <input type="text" name="description" id="description" placeholder='Descrição' >
                         <br>
                         <button type="submit">Pagar</button>
                     </div>
