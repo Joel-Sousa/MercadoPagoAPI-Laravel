@@ -17,7 +17,6 @@ class PixValidation
             ],
             [
                 'payerFirstName.required' => 'O campo de nome e obrigatorio!',
-                'transaction_amount.required' => 'O campo de valor e obrigatorio!',
             ]
         );
 

@@ -67,9 +67,8 @@
                 <select id="form-checkout__issuer"></select>
                 <select id="form-checkout__installments"></select>
                 <select id="form-checkout__identificationType"></select>
-                <input type="text" id="form-checkout__identificationNumber" placeholder='Numero do documento'
-                    value='12345678909' />
-                <input type="email" id="form-checkout__cardholderEmail" placeholder='E-mail' value='tst@tst.com' />
+                <input type="text" id="form-checkout__identificationNumber" placeholder='Numero do documento'/>
+                <input type="email" id="form-checkout__cardholderEmail" placeholder='E-mail' />
 
                 <input type="text" id="form-product-description" name='description' placeholder='Descricao' />
                 <input type="number" id="form-checkout__amount" name='name' placeholder='Valor' value='10' />
@@ -120,12 +119,7 @@
     <script>
         const mp = new MercadoPago("{{ env('MERCADO_PAGO_PUBLIC_KEY') }}");
 
-        // const productDescription = document.getElementById('form-product-description').value;
-        // const productDescription1 = document.querySelector('form-product-description');
-        // const productCost = document.getElementById('form-checkout__amount').value;
-
-        // console.log("productDescription:", productDescription);
-        // console.log("productDescription1:", productDescription1.value);
+        
 
         const cardForm = mp.cardForm({
             amount: document.getElementById('form-checkout__amount').value,
