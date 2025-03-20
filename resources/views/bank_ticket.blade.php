@@ -227,6 +227,7 @@
         @else
             <script>
                 window.onload = function() {
+        // {{-- {{ dd($resp->original['error']->data[0]->erro) }} --}}
                     window.open("{{ url($resp['external_resource_url']) }}", '_blank');
                 };
             </script>

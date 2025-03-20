@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\MercadoPagoService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MercadoPagoController extends Controller
 {
@@ -17,6 +18,7 @@ class MercadoPagoController extends Controller
 
     public function statusPayment(Request $request)
     {
+        Log::error('tst', $request->all());
         return $this->mercadoPagoService->statusPayment($request);
     }
 }

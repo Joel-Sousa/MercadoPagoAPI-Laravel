@@ -34,3 +34,4 @@ Route::post('/credit-card', [CreditCardController::class, 'createCreditCardPayme
 Route::post('/pix', [PixController::class, 'createPixPayment']);
 Route::post('/bank-ticket', [BankTicketController::class, 'createBankTicketPayment']);
 
+// Route::post('/pix', [PixController::class, 'createPixPayment'])->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);;

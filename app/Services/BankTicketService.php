@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Jobs\SendMailJob;
 use App\Repositories\BankTicketRepository;
 use App\Traits\UtilTrait;
+use App\Validations\BankTicketValidation;
 use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\Payment\PaymentClient;
 use MercadoPago\MercadoPagoConfig;
@@ -25,6 +26,10 @@ class BankTicketService
         MercadoPagoConfig::setAccessToken(env("MERCADO_PAGO_ACCESS_TOKEN"));
 
         try {
+
+            $error = BankTicketValidation::validate($request);
+
+            if($error->erro) return response(json_encode(array('error_message' => $error)));
 
             $uniq = uniqid("", true);
 

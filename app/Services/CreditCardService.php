@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Jobs\SendMailJob;
 use App\Repositories\CreditCardRepository;
 use App\Traits\UtilTrait;
+use App\Validations\CreditCardValidation;
 use Exception;
 use MercadoPago\Client\Common\RequestOptions;
 use MercadoPago\Client\Payment\PaymentClient;
@@ -26,6 +27,11 @@ class CreditCardService
         MercadoPagoConfig::setAccessToken(env("MERCADO_PAGO_ACCESS_TOKEN"));
 
         try {
+
+            $error = CreditCardValidation::validate($request);
+
+            if($error->erro) return response(json_encode(array('error_message' => $error)));
+            // throw_if($error->erro, new \App\Exceptions\CreditCardException('Campos necessarios devem ser preenchidos'), 406);
 
             $uniq = uniqid("", true);
 

@@ -59,19 +59,20 @@
             <h3>Cartao de credito</h3>
             <form id="form-checkout" method="POST">
                 @csrf
-                <div id="form-checkout__cardNumber" class="container" ></div>
-                <div id="form-checkout__expirationDate" class="container" ></div>
-                <div id="form-checkout__securityCode" class="container" ></div>
-                <input type="text" id="form-checkout__cardholderName"/>
+                <div id="form-checkout__cardNumber" class="container"></div>
+                <div id="form-checkout__expirationDate" class="container"></div>
+                <div id="form-checkout__securityCode" class="container"></div>
+                <input type="text" id="form-checkout__cardholderName" />
 
                 <select id="form-checkout__issuer"></select>
                 <select id="form-checkout__installments"></select>
                 <select id="form-checkout__identificationType"></select>
-                <input type="text" id="form-checkout__identificationNumber" placeholder='Numero do documento'/>
-                <input type="email" id="form-checkout__cardholderEmail" placeholder='E-mail' />
+                <input type="text" id="form-checkout__identificationNumber" placeholder='Numero do documento'
+                    value='12345678909' />
+                <input type="email" id="form-checkout__cardholderEmail" placeholder='E-mail' value='tst@tst.com' />
 
-                <input type="text" id="form-product-description" name='description' placeholder='Descricao'/>
-                <input type="number" id="form-checkout__amount" name='name'  placeholder='Valor' valor='10'/>
+                <input type="text" id="form-product-description" name='description' placeholder='Descricao' />
+                <input type="number" id="form-checkout__amount" name='name' placeholder='Valor' value='10' />
 
                 <button type="submit" id="form-checkout__submit">Pagar</button>
                 <progress class="progress-bar">Carregando...</progress>
@@ -119,13 +120,15 @@
     <script>
         const mp = new MercadoPago("{{ env('MERCADO_PAGO_PUBLIC_KEY') }}");
 
-        const productDescription = document.getElementById('form-product-description').value;
-        const productCost = document.getElementById('form-checkout__amount').value;
+        // const productDescription = document.getElementById('form-product-description').value;
+        // const productDescription1 = document.querySelector('form-product-description');
+        // const productCost = document.getElementById('form-checkout__amount').value;
 
-        console.log("productDescription:", productDescription);
+        // console.log("productDescription:", productDescription);
+        // console.log("productDescription1:", productDescription1.value);
 
         const cardForm = mp.cardForm({
-            amount: productCost,
+            amount: document.getElementById('form-checkout__amount').value,
             iframe: true,
             form: {
                 id: "form-checkout",
@@ -197,7 +200,8 @@
                                 payment_method_id,
                                 transaction_amount: Number(amount),
                                 installments: Number(installments),
-                                description: productDescription,
+                                description: document.getElementById('form-product-description')
+                                    .value,
                                 payer: {
                                     email,
                                     identification: {
@@ -211,6 +215,9 @@
                             return response.json();
                         })
                         .then(result => {
+                            // console.log(" result:", JSON.parse(result);
+                            console.log(" result:", result);
+
                             if (!result.hasOwnProperty("error_message")) {
 
                                 const resp =
